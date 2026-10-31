@@ -1,11 +1,13 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReceiveDamage : MonoBehaviour
 {
     public int health = 100;
     public TextMeshProUGUI HealthText;
+    public Image healthbar;
     void Start()
     {
         
@@ -24,6 +26,7 @@ public class ReceiveDamage : MonoBehaviour
             Destroy(collision.gameObject);
             health -= 10;
             HealthText.text = health.ToString();
+            healthbar.fillAmount = health/100f;
             if (health <= 0)
             {
                 Destroy(gameObject);

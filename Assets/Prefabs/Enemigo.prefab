@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   health: 100
   HealthText: {fileID: 4435846976812504678}
+  healthbar: {fileID: 3959157262926223897}
 --- !u!195 &-3416306097812555807
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -614,7 +615,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
