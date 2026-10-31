@@ -1,2 +1,10 @@
 # 1era y 3era Persona
-Proyecto educativo de mecanicas en 1era y 3era persona
+
+Paco Vesco Aparicio
+
+
+
+
+
+Proyecto educativo de mecánicas en 1era y 3era persona en Unity
+
