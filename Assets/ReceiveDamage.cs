@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class ReceiveDamage : MonoBehaviour
@@ -8,9 +10,13 @@ public class ReceiveDamage : MonoBehaviour
     public int health = 100;
     public TextMeshProUGUI HealthText;
     public Image healthbar;
+    public Animator enemyAnimator;
+    public NavMeshAgent agent;
+    public float totalhealth = 100f;
     void Start()
     {
-        
+        enemyAnimator = GetComponentInChildren<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -26,11 +32,18 @@ public class ReceiveDamage : MonoBehaviour
             Destroy(collision.gameObject);
             health -= 10;
             HealthText.text = health.ToString();
-            healthbar.fillAmount = health/100f;
+            healthbar.fillAmount = health/totalhealth;
             if (health <= 0)
             {
-                Destroy(gameObject);
+                StartCoroutine(Death());
             }
         }
+    }
+    public IEnumerator Death()
+    {
+        agent.speed = 0;
+        enemyAnimator.SetBool("IsDead", true);
+        yield return new WaitForSecondsRealtime(3f);
+        Destroy(gameObject);
     }
 }
