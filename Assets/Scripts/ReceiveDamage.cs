@@ -24,15 +24,18 @@ public class ReceiveDamage : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Projectile"))
         {
             Debug.Log("Received Damage");
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
             health -= 10;
-            HealthText.text = health.ToString();
-            healthbar.fillAmount = health/totalhealth;
+            healthbar.fillAmount = health / totalhealth;
+            if (health >= 0)
+            {
+                HealthText.text = health.ToString();
+            }
             if (health <= 0)
             {
                 StartCoroutine(Death());
