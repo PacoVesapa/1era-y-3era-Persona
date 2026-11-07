@@ -7,6 +7,7 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		public static bool jugadorMuerto = false;
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -25,7 +26,7 @@ namespace StarterAssets
 		public Transform proyectilSpawnPoint;
 		public float ShootForce = 20f;
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -49,6 +50,10 @@ namespace StarterAssets
 		}
         public void OnShoot(InputValue value)
         {
+			if (jugadorMuerto)
+			{
+				return;
+			}
             Debug.Log("Shoot");
 			Shoot();
         }
@@ -56,6 +61,10 @@ namespace StarterAssets
 
 		private void Shoot()
 		{
+			if (jugadorMuerto)
+			{
+				return;
+			}
 			GameObject newProjectile = Instantiate(proyectilPrefab, proyectilSpawnPoint.position, Quaternion.identity);
 			newProjectile.GetComponent<Rigidbody>().AddForce(proyectilSpawnPoint.up * ShootForce, ForceMode.Impulse);
 			Destroy(newProjectile, 3f);

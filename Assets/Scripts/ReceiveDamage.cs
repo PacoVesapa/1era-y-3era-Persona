@@ -13,10 +13,12 @@ public class ReceiveDamage : MonoBehaviour
     public Animator enemyAnimator;
     public NavMeshAgent agent;
     public float totalhealth = 100f;
+    public CapsuleCollider hitbox;
     void Start()
     {
         enemyAnimator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        hitbox = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,7 @@ public class ReceiveDamage : MonoBehaviour
     }
     public IEnumerator Death()
     {
+        hitbox.enabled = false;
         agent.speed = 0;
         enemyAnimator.SetBool("IsDead", true);
         yield return new WaitForSecondsRealtime(3f);
